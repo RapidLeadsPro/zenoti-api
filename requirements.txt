@@ -1,4 +1,4 @@
-ag2[openai,mcp,mcp-proxy-gen]>=0.9.4
+ag2[openai,mcp,mcp-proxy-gen]==0.11.2
 pydantic[email]>=2.6.1
 fastapi>=0.112
 uvicorn>=0.30.0

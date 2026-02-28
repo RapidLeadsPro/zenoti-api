@@ -1,3 +1,6 @@
+[providers.python]
+version = "3.12"
+
 [phases.install]
 cmds = [
   "pip install --upgrade pip",
