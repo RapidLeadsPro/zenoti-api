@@ -3,7 +3,6 @@
 #   timestamp: 2025-06-29T12:32:30+00:00
 
 
-
 import argparse
 import json
 import os
@@ -11,6 +10,14 @@ from typing import *
 
 from autogen.mcp.mcp_proxy import MCPProxy
 from autogen.mcp.mcp_proxy.security import BaseSecurity
+
+# Patch: inject FastMCP into the mcp_proxy module scope.
+# ag2's optional_import_block bundles FastMCP with mcp-proxy-gen deps
+# (datamodel_code_generator, fastapi_code_generator) which don't support
+# Python 3.13. FastMCP itself is available from the mcp package directly.
+import autogen.mcp.mcp_proxy.mcp_proxy as _mcp_proxy_mod
+from mcp.server.fastmcp import FastMCP
+_mcp_proxy_mod.FastMCP = FastMCP
 
 app = MCPProxy(
     contact={'email': 'apisupport@zenoti.com', 'x-twitter': 'ZenotiSoftware'},
