@@ -54,4 +54,10 @@ if __name__ == "__main__":
 
     mcp_settings = json.loads(os.environ.get("MCP_SETTINGS", "{}"))
 
+    # Bind to 0.0.0.0 so Railway's proxy can reach the server.
+    # Use Railway's PORT env var if set, otherwise default to 8000.
+    port = int(os.environ.get("PORT", 8000))
+    mcp_settings.setdefault("host", "0.0.0.0")
+    mcp_settings.setdefault("port", port)
+
     app.get_mcp(**mcp_settings).run(transport=args.transport)
